@@ -8,9 +8,9 @@ public interface CandidateServiceInterface {
 
     public Candidate createCandidate(Candidate candidate);
 
-    public Optional<Candidate> readCandidate(Long id);
+    public Candidate readCandidate(Long id);
 
     public Candidate updateCandidate(Long id, Candidate candidate);
 
-    public Optional<Candidate> deleteCandidate(Long id);
+    public Candidate deleteCandidate(Long id);
 }

@@ -12,8 +12,8 @@ public class UserService implements UserServiceInterface {
     }
 
     @Override
-    public Optional<User> readUser(Long id) {
-        return Optional.empty();
+    public User readUser(Long id) {
+        return null;
     }
 
     @Override
@@ -22,7 +22,7 @@ public class UserService implements UserServiceInterface {
     }
 
     @Override
-    public Optional<User> deleteUser(Long id) {
-        return Optional.empty();
+    public User deleteUser(Long id) {
+        return null;
     }
 }
