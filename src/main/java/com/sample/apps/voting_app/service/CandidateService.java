@@ -1,7 +1,6 @@
 package com.sample.apps.voting_app.service;
 
 import com.sample.apps.voting_app.entities.Candidate;
-import com.sample.apps.voting_app.exceptions.CandidateNotFoundException;
 import com.sample.apps.voting_app.repositories.CandidateRepository;
 import com.sample.apps.voting_app.service.interfaces.CandidateServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,21 +23,37 @@ public class CandidateService implements CandidateServiceInterface {
     }
 
     @Override
-    public Candidate readCandidate(Long id) {
-        Optional<Candidate> tempCandidate = candidateRepo.findById(id);
-        if (tempCandidate.isPresent()){
-            return tempCandidate.get();
-        }
-        throw new CandidateNotFoundException();
+    public Optional<Candidate> readCandidate(Long id) {
+        return candidateRepo.findById(id);
     }
 
     @Override
     public Candidate updateCandidate(Long id, Candidate candidate) {
-        return null;
+        Optional<Candidate> candidateToUpdate = candidateRepo.findById(id);
+        if(candidateToUpdate.isEmpty()){
+            return null;
+        }
+        candidateToUpdate.get().setName(candidate.getName());
+        return candidateRepo.save(candidateToUpdate.get());
     }
 
     @Override
     public Optional<Candidate> deleteCandidate(Long id) {
-        return Optional.empty();
+        Optional<Candidate> deletedCandidate = candidateRepo.findById(id);
+        if(deletedCandidate.isEmpty()){
+            return Optional.empty();
+        }
+        candidateRepo.delete(deletedCandidate.get());
+        return deletedCandidate;
+    }
+
+    @Override
+    public Candidate updateVoteCount(Long id) {
+        Optional<Candidate> candidateToUpdate = candidateRepo.findById(id);
+        if(candidateToUpdate.isEmpty()){
+            return null;
+        }
+        candidateToUpdate.get().setVoteCount(candidateToUpdate.get().getVoteCount()+1);
+        return candidateRepo.save(candidateToUpdate.get());
     }
 }
