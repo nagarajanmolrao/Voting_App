@@ -1,5 +1,7 @@
 package com.sample.apps.voting_app.entities;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,8 +15,9 @@ import lombok.*;
 public class Candidate {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    private String id;
 
     @Column(name="CandidateName", nullable = false)
     private String name;

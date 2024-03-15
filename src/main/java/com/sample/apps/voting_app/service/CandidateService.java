@@ -3,12 +3,16 @@ package com.sample.apps.voting_app.service;
 import com.sample.apps.voting_app.entities.Candidate;
 import com.sample.apps.voting_app.repositories.CandidateRepository;
 import com.sample.apps.voting_app.service.interfaces.CandidateServiceInterface;
+
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class CandidateService implements CandidateServiceInterface {
 
     private final CandidateRepository candidateRepo;
@@ -23,12 +27,12 @@ public class CandidateService implements CandidateServiceInterface {
     }
 
     @Override
-    public Optional<Candidate> readCandidate(Long id) {
+    public Optional<Candidate> readCandidate(String id) {
         return candidateRepo.findById(id);
     }
 
     @Override
-    public Candidate updateCandidate(Long id, Candidate candidate) {
+    public Candidate updateCandidate(String id, Candidate candidate) {
         Optional<Candidate> candidateToUpdate = candidateRepo.findById(id);
         if(candidateToUpdate.isEmpty()){
             return null;
@@ -38,7 +42,7 @@ public class CandidateService implements CandidateServiceInterface {
     }
 
     @Override
-    public Optional<Candidate> deleteCandidate(Long id) {
+    public Optional<Candidate> deleteCandidate(String id) {
         Optional<Candidate> deletedCandidate = candidateRepo.findById(id);
         if(deletedCandidate.isEmpty()){
             return Optional.empty();
@@ -48,7 +52,7 @@ public class CandidateService implements CandidateServiceInterface {
     }
 
     @Override
-    public Candidate updateVoteCount(Long id) {
+    public Candidate updateVoteCount(String id) {
         Optional<Candidate> candidateToUpdate = candidateRepo.findById(id);
         if(candidateToUpdate.isEmpty()){
             return null;

@@ -7,15 +7,15 @@ import java.util.Optional;
 public interface UserServiceInterface {
     public User createUser(User user);
 
-    public Optional<User> readUser(Long id);
+    public Optional<User> readUser(String id);
 
-    public User updateUser(Long id, User user);
+    public User updateUser(String id, User user);
 
-    public Optional<User> deleteUser(Long id);
+    public Optional<User> deleteUser(String id);
 
     public Optional<User> login(String email, String password);
 
     public User logout(User user);
 
-    public User updateVoteStatus(Long id);
+    public User updateVoteStatus(String id);
 }

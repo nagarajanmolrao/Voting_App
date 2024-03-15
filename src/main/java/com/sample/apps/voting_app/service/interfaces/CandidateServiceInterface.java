@@ -8,11 +8,11 @@ public interface CandidateServiceInterface {
 
     public Candidate createCandidate(Candidate candidate);
 
-    public Optional<Candidate> readCandidate(Long id);
+    public Optional<Candidate> readCandidate(String id);
 
-    public Candidate updateCandidate(Long id, Candidate candidate);
+    public Candidate updateCandidate(String id, Candidate candidate);
 
-    public Optional<Candidate> deleteCandidate(Long id);
+    public Optional<Candidate> deleteCandidate(String id);
 
-    public Candidate updateVoteCount(Long id);
+    public Candidate updateVoteCount(String id);
 }

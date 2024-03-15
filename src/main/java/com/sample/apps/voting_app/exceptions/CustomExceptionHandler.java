@@ -9,6 +9,7 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.orm.jpa.JpaObjectRetrievalFailureException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
 @ControllerAdvice
 public class CustomExceptionHandler {
@@ -46,5 +47,15 @@ public class CustomExceptionHandler {
         cer.setMsg(ex.getMessage());
         cer.setTimestamp(System.currentTimeMillis());
         return new ResponseEntity<>(cer, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(MaxUploadSizeExceededException.class)
+    public ResponseEntity<CustomErrorResponse> handleMaxUploadSizeException(MaxUploadSizeExceededException ex, 
+    HttpServletRequest request) {
+        CustomErrorResponse cer = new CustomErrorResponse();
+        cer.setStatus(HttpStatus.BAD_REQUEST.value());
+        cer.setMsg("File size too large !!");
+        cer.setTimestamp(System.currentTimeMillis());
+        return new ResponseEntity<CustomErrorResponse>(cer, HttpStatus.BAD_REQUEST);
     }
 }
