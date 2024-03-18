@@ -1,4 +1,4 @@
-package com.sample.apps.voting_app.restControllers;
+package com.sample.apps.voting_app.rest_controllers;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

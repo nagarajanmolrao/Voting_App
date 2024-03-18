@@ -56,6 +56,16 @@ public class CustomExceptionHandler {
         cer.setStatus(HttpStatus.BAD_REQUEST.value());
         cer.setMsg("File size too large !!");
         cer.setTimestamp(System.currentTimeMillis());
-        return new ResponseEntity<CustomErrorResponse>(cer, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(cer, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ImageReadException.class)
+    public ResponseEntity<CustomErrorResponse> handleImageReadException(ImageReadException ex,
+                                                                            HttpServletRequest request) {
+        CustomErrorResponse cer = new CustomErrorResponse();
+        cer.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        cer.setMsg(ex.getMessage());
+        cer.setTimestamp(System.currentTimeMillis());
+        return new ResponseEntity<>(cer, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

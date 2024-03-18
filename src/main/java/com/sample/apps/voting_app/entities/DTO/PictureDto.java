@@ -1,4 +1,4 @@
-package com.sample.apps.voting_app.entities.DTO;
+package com.sample.apps.voting_app.entities.dto;
 
 import com.sample.apps.voting_app.entities.Picture;
 

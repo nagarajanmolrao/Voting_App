@@ -1,6 +1,7 @@
 package com.sample.apps.voting_app.service;
 
 import com.sample.apps.voting_app.entities.Picture;
+import com.sample.apps.voting_app.entities.dto.PictureDto;
 import com.sample.apps.voting_app.repositories.PictureRepository;
 import com.sample.apps.voting_app.service.interfaces.PictureServiceInterface;
 import com.sample.apps.voting_app.utils.CompressionUtility;
@@ -55,6 +56,15 @@ public class PictureService implements PictureServiceInterface {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public PictureDto getPictureInfo(String id){
+        Optional<Picture> picture = pictureRepo.findById(id);
+        return picture.map(value -> PictureDto.builder().id(value.getId())
+                .type(value.getType())
+                .fileType(value.getFileType())
+                .linkedId(value.getLinkedId()).build()).orElse(null);
     }
 
     @Override
