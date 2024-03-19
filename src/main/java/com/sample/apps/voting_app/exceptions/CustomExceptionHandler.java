@@ -59,13 +59,23 @@ public class CustomExceptionHandler {
         return new ResponseEntity<>(cer, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(ImageReadException.class)
-    public ResponseEntity<CustomErrorResponse> handleImageReadException(ImageReadException ex,
-                                                                            HttpServletRequest request) {
+    @ExceptionHandler(PictureException.class)
+    public ResponseEntity<CustomErrorResponse> handleImageReadException(PictureException ex,
+                                                                        HttpServletRequest request) {
         CustomErrorResponse cer = new CustomErrorResponse();
         cer.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
         cer.setMsg(ex.getMessage());
         cer.setTimestamp(System.currentTimeMillis());
         return new ResponseEntity<>(cer, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(DataNotFoundException.class)
+    public ResponseEntity<CustomErrorResponse> handleNotFoundException(DataNotFoundException ex,
+                                                                        HttpServletRequest request) {
+        CustomErrorResponse cer = new CustomErrorResponse();
+        cer.setStatus(HttpStatus.NOT_FOUND.value());
+        cer.setMsg(ex.getMessage());
+        cer.setTimestamp(System.currentTimeMillis());
+        return new ResponseEntity<>(cer, HttpStatus.NOT_FOUND);
     }
 }

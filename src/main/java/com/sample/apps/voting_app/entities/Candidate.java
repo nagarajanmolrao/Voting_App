@@ -5,6 +5,8 @@ import org.hibernate.annotations.GenericGenerator;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.UUID;
+
 @Entity
 @Getter
 @Setter
@@ -15,9 +17,8 @@ import lombok.*;
 public class Candidate {
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String id;
+    @GeneratedValue
+    private UUID id;
 
     @Column(name="CandidateName", nullable = false)
     private String name;

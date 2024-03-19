@@ -1,9 +1,13 @@
 package com.sample.apps.voting_app.entities;
 
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.annotations.GenericGenerator;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.id.UUIDGenerator;
+
+import java.util.UUID;
 
 @Entity
 
@@ -18,9 +22,8 @@ import lombok.*;
 public class Picture {
     
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String id;
+    @GeneratedValue
+    private UUID id;
 
     @Column(name = "FileType", nullable=false)
     private String fileType;
@@ -33,5 +36,8 @@ public class Picture {
     private byte[] imageData;
 
     @Column(name="LinkedId")
-    private Long linkedId;
+    private String linkedId;
+
+    @Column(name="Tag")
+    private String tag;
 }

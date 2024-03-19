@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @Slf4j
@@ -28,12 +29,12 @@ public class CandidateService implements CandidateServiceInterface {
 
     @Override
     public Optional<Candidate> readCandidate(String id) {
-        return candidateRepo.findById(id);
+        return candidateRepo.findById(UUID.fromString(id));
     }
 
     @Override
     public Candidate updateCandidate(String id, Candidate candidate) {
-        Optional<Candidate> candidateToUpdate = candidateRepo.findById(id);
+        Optional<Candidate> candidateToUpdate = candidateRepo.findById(UUID.fromString(id));
         if(candidateToUpdate.isEmpty()){
             return null;
         }
@@ -43,7 +44,7 @@ public class CandidateService implements CandidateServiceInterface {
 
     @Override
     public Optional<Candidate> deleteCandidate(String id) {
-        Optional<Candidate> deletedCandidate = candidateRepo.findById(id);
+        Optional<Candidate> deletedCandidate = candidateRepo.findById(UUID.fromString(id));
         if(deletedCandidate.isEmpty()){
             return Optional.empty();
         }
@@ -53,7 +54,7 @@ public class CandidateService implements CandidateServiceInterface {
 
     @Override
     public Candidate updateVoteCount(String id) {
-        Optional<Candidate> candidateToUpdate = candidateRepo.findById(id);
+        Optional<Candidate> candidateToUpdate = candidateRepo.findById(UUID.fromString(id));
         if(candidateToUpdate.isEmpty()){
             return null;
         }

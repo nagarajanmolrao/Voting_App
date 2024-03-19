@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.UUID;
+
 @Getter
 @Setter
 @Builder
@@ -16,15 +18,18 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PictureDto {
-    private String id;
+    private UUID id;
     private String fileType;
     private String type;
-    private Long linkedId;
+    private String linkedId;
+
+    private String tag;
 
     public PictureDto(Picture pic){
         this.id = pic.getId();
         this.fileType = pic.getFileType();
         this.type = pic.getType();
         this.linkedId = pic.getLinkedId();
+        this.tag = pic.getTag();
     }
 }
